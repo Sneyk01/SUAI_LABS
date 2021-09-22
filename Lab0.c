@@ -1,21 +1,27 @@
 #include <stdio.h>
-int a = 0, b = 0, c = 0;
 
-int main() {
+
+main() {
+	
+	int a = 0, b = 0, c = 0, code = 0;
 	
 	printf("Enter 2 integers: \n");
-	scanf("%d%d", &a, &b);
-
-	if (b == 0) {
-		while (b == 0) {
-			printf("Error: division by 0, re-enter. \n");
-			printf("Enter 2 integers: \n");
-			scanf("%d%d", &a, &b);
-		}
+	
+	while ((code = scanf("%d%d", &a, &b) != 2 && (b == 0))) {
+		printf("INPUT ERROR! \n");
+		getchar();
+		getchar();
 	}
-	c = a % b;
-	printf("%d is the remainder. \n", c);
 
+	if ((code == 2) || (b != 0)) {
+		c = a % b;
+		printf("%d is the remainder. \n", c);
+		
+	}
+	else {
+		printf("INPUT ERROR! \n");
+		return -1;
+	}
 	return 0;
 
 }
