@@ -1,6 +1,6 @@
 #include <stdio.h>
 
-
+//new_change
 main() {
 	
 	int a = 0, b = 0, c = 0, code = 0;
