@@ -29,7 +29,10 @@ main() {
 		for (int i = 8; i >= 1; i--) {
 			NumMem[i] = ((c - 1) - NumMem[i]);
 			if (i == 8 || flag == 1) {
-				if ((NumMem[i] + 1) > (c - 1)) flag = 1;
+				if ((NumMem[i] + 1) > (c - 1)) {
+					flag = 1;
+					NumMem[i] = 0;
+				}
 				else {
 					NumMem[i] += 1;
 					flag = 0;
