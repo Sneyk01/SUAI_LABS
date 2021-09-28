@@ -1,59 +1,59 @@
 #include <stdio.h>
 
 main() {
-	int num = 0;
-	char a = 0, b = 0, f = 1, flag = 0, code = 0;
-	int c = 3;					//The required number system
-	char NumMem[9] = {0, 0, 0, 0, 0, 0, 0, 0, 0};
+	unsigned char a = 0;
+	char b = 0, f = 1, flag = 0, code = 0, ab, code1 = 0, flag1 = 0;
+	char c = 3;		//The required number system
+	char NumMem[9] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-	printf("Enter 1 integers: (-127...127)\n");
-	code = scanf("%d", &num);
-	while (code != 1 || num < -127 || num > 127) {
+	printf("Enter reqired number system [2..20]: \n");
+	code1 = scanf("%hhd", &c);
+	while (code1 != 1 || c > 20 || c < 2) {
+		printf("INPUT ERROR! \n");
+		printf("Enter reqired number system [2..20]: \n");
+		getchar();
+		code1 = scanf("%hhd", &c);
+	}
+
+	printf("Enter 1 integers: (-128...127)\n");
+	code = scanf("%hhd", &ab);
+	while (code != 1) {
 		printf("INPUT ERROR! \n");
 		printf("Enter 1 integers: \n");
 		getchar();
-		code = scanf("%hhd", &num);
+		code = scanf("%hhd", &ab);
 	}
 
-	a = num;
-	if (a < 0) {
-		a *= -1;
-		NumMem[0] = c - 1;
+	a = ab;
+	if (c != 10) {
 		for (int i = 8; i >= 1; i--) {
 			b = a % c;
 			a = a / c;
 			NumMem[i] = b;
 		}
-
-		//for (int i = 0; i <= 8; i ++)	printf("%d.", NumMem[i]);
-		for (int i = 8; i >= 1; i--) {
-			NumMem[i] = ((c - 1) - NumMem[i]);
-			if (i == 8 || flag == 1) {
-				if ((NumMem[i] + 1) > (c - 1)) {
-					flag = 1;
-					NumMem[i] = 0;
-				}
-				else {
-					NumMem[i] += 1;
-					flag = 0;
-				}
+		printf("In %d number system: ", c);
+		for (int i = 1; i <= 8; i++) {
+			if (NumMem[i] != 0 || flag1 == 0) {
+				if (NumMem[i] == 10) printf("A");
+				if (NumMem[i] == 11) printf("B");
+				if (NumMem[i] == 12) printf("C");
+				if (NumMem[i] == 13) printf("D");
+				if (NumMem[i] == 14) printf("E");
+				if (NumMem[i] == 15) printf("F");
+				if (NumMem[i] == 16) printf("G");
+				if (NumMem[i] == 17) printf("H");
+				if (NumMem[i] == 18) printf("I");
+				if (NumMem[i] == 19) printf("J");
+				if (NumMem[i] < 10)	printf("%d", NumMem[i]);
+				//flag1 = 1;
 			}
 		}
-		//for (int i = 0; i <= 8; i++)	printf("%d.", NumMem[i]);		
+
 	}
-
-
 	else {
-		for (int i = 8; i >= 1; i --) {
-			b = a % c;
-			a = a / c;
-			NumMem[i] = b;
-		}
+		printf("%d", ab);
 	}
-
-	printf("%d'", NumMem[0]);
-	for (int i = 1; i <= 8; i++)	printf("%d.", NumMem[i]);
-
+	
 	printf("\n");
 	return 0;
 }
