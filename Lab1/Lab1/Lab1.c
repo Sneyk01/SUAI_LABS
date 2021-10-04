@@ -34,16 +34,7 @@ main() {
 		printf("In %d number system: ", c);
 		for (int i = 1; i <= 8; i++) {
 			if (NumMem[i] != 0 || flag1 == 1) {
-				if (NumMem[i] == 10) printf("A");
-				if (NumMem[i] == 11) printf("B");
-				if (NumMem[i] == 12) printf("C");
-				if (NumMem[i] == 13) printf("D");
-				if (NumMem[i] == 14) printf("E");
-				if (NumMem[i] == 15) printf("F");
-				if (NumMem[i] == 16) printf("G");
-				if (NumMem[i] == 17) printf("H");
-				if (NumMem[i] == 18) printf("I");
-				if (NumMem[i] == 19) printf("J");
+				if (NumMem[i] >= 10) printf("%c", NumMem[i] + 55);
 				if (NumMem[i] < 10)	printf("%d", NumMem[i]);
 				flag1 = 1;
 			}
