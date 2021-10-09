@@ -21,12 +21,12 @@ main() {
 		}
 	}
 
-	printf("\n\nold mass: \n");
+	printf("\n\nold array: \n");
 	for (int i = 0; i < LenArr; i++) printf("%d ", arr[i]);
 
 	EditArr(&arr[0], 10);
 
-	printf("new mass: \n");
+	printf("new array: \n");
 	for (int i = 0; i < LenArr; i++) printf("%d ", arr[i]);
 
 }
