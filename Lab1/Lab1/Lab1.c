@@ -6,11 +6,11 @@ main() {
 	char c = 3;		//The required number system
 	char NumMem[9] = { 0, 0, 0, 0, 0, 0, 0, 0, 0 };
 
-	printf("Enter reqired number system [2..20]: \n");
+	printf("Enter reqired number system [2..36]: \n");
 	code1 = scanf("%hhd", &c);
-	while (code1 != 1 || c > 20 || c < 2) {
+	while (code1 != 1 || c > 36 || c < 2) {
 		printf("INPUT ERROR! \n");
-		printf("Enter reqired number system [2..20]: \n");
+		printf("Enter reqired number system [2..36]: \n");
 		getchar();
 		code1 = scanf("%hhd", &c);
 	}
