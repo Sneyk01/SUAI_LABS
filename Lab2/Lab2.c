@@ -17,6 +17,7 @@ main() {
 		while (getchar() != '\n') {}
 		printf("Inout Error! Enter count of vowels : \n");
 	}
+
 	while (getchar() != '\n') {}
 	printf("Print string (max 10000 symb):\n");
 	fgets(&a, 10000, stdin);
