@@ -122,6 +122,13 @@ int createList (char *wordStr, list_t *list)  {
         }
         i++;
     }
+    if (inWord == 1) {
+        int num = 0;
+        word = (char*) malloc((len + 1) * sizeof (char));
+        for (int bf = startPos; bf < endPos; bf++) word[num++] = wordStr[bf];
+        word[num] = 0;
+        checkWord(list, word, len);
+    }
 }
 
 void swap(word_t *word1, word_t *word2) {  // word1 is always above word2!!!
@@ -232,8 +239,11 @@ void freeRam (list_t *list) {
 
 int main() {
     char wordString[defWordLen] = "";
-    printf("Please enter string: \n");
-    fgets(wordString, defWordLen, stdin);
+    //printf("Please enter string: \n");
+    FILE *fileTest;
+    fileTest = fopen("D:\\Project\\C\\Lab6List\\test.txt", "r");
+    fgets(wordString, defWordLen, fileTest);
+    printf("String from file: %s\n", wordString);
     list_t wordList;
     init(&wordList);
     createList(wordString, &wordList);
@@ -251,5 +261,6 @@ int main() {
     //sortList(&notUniqueWords);
     printList(&notUniqueWords, 0);
     freeRam(&wordList);
+    fclose(fileTest);
     return 0;
 }
