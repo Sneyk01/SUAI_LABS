@@ -23,7 +23,7 @@ void init(list_t *list) {
     list->size = 0;
 }
 
-void pushBack ( list_t *list, char *word, int len, int count) {
+void pushBack (list_t *list, char *word, int len, int count) {
     word_t *new, *bf;
     new = (word_t*) malloc(sizeof(word_t));
     new->word = word;
@@ -42,14 +42,36 @@ void pushBack ( list_t *list, char *word, int len, int count) {
     }
     list->size++;
 }
-
-void printList(list_t *list)    {
+//pushFront
+void pushFront (list_t *list, char *word, int len, int count) {
+    word_t *new, *bf;
+    new = (word_t*) malloc(sizeof(word_t));
+    new->word = word;
+    new->wordLen = len;
+    new->wordCount = count;
+    new->prev = NULL;
+    if (list->head == NULL) {
+        list->head = new;
+        new->next = NULL;
+    }
+    else {
+        new->next = list->head;
+        list->head->prev = new;
+        list->head = new;
+    }
+    list->size++;
+}
+//1 - 1 гласная 2 - > 1
+void printList(list_t *list, int param)    {
     word_t *bf = list->head;
     while (bf != NULL) {
         //printf("%s|%d||%d|%d|%d\n", bf->word, bf->wordCount, bf->prev, bf, bf->next);
-        printf("%s ", bf->word);
+        if (param == 1) for (int i = 0; i < bf->wordCount; i++) printf("%s ", bf->word);
+        if (param == 2) printf("%s (%d times) ", bf->word, bf->wordCount);
+        if (param == 0) printf("%s ", bf->word);
         bf = bf->next;
     }
+    printf("\n");
 }
 
 void checkWord(list_t *list, char *word, int len) {
@@ -64,14 +86,14 @@ void checkWord(list_t *list, char *word, int len) {
             if (value[i] == word[i]) check++;
             else break;
         }
-        if (check == len) {
+        if (check == len && check == lim) {
             wordNode->wordCount++;
             close = 1;
             break;
         }
         wordNode = wordNode->next;
     }
-    if (close == 0) pushBack(list, word, len, 1);
+    if (close == 0) pushFront(list, word, len, 1); //Было pushBack
 }
 
 int createList (char *wordStr, list_t *list)  {
@@ -102,9 +124,9 @@ int createList (char *wordStr, list_t *list)  {
     }
 }
 
-void swap(word_t *word1, word_t *word2) {
+void swap(word_t *word1, word_t *word2) {  // word1 is always above word2!!!
     word_t *tempPrev, *tempNext;
-    if (word2->prev->next != word2) {
+    if (word2->prev != word1) {
         word1->prev->next = word2;
         word2->prev->next = word1;
         word1->next->prev = word2;
@@ -116,7 +138,7 @@ void swap(word_t *word1, word_t *word2) {
         word2->prev=tempPrev;
         word2->next=tempNext;
     }
-    else {                                                      //word1 above word2
+    else {                                                      //word1->next == word2
         word1->prev->next = word2;
         word1->next = word2->next;
         if (word2->next != NULL) word2->next->prev = word1;
@@ -127,48 +149,72 @@ void swap(word_t *word1, word_t *word2) {
 }
 
 void sortList (list_t *list) {
-    int minLen = defWordLen;
-    word_t *mem, *temp, *startNode, *startNodeOld;
-    word_t *wordNode = list->head;
-    while (wordNode != NULL) {
-        if (wordNode->wordLen < minLen) {
-            minLen = wordNode->wordLen;
-            mem = wordNode;
-        }
-        wordNode = wordNode->next;
-    }
-    if (list->head != mem) {
-        list->head->prev = mem->prev;
-        mem->prev->next = list->head;
-        if (mem->next != NULL) mem->next->prev = list->head;
-        temp = list->head->next;
-        list->head->next = mem->next;
-        list->head = mem;
-        mem->prev = NULL;
-        mem->next = temp;
-        mem->next->prev = mem;
-    }
-    for (int cycle = 1; cycle < list->size; cycle++) {
-        startNode = list->head;
-        minLen = defWordLen;
-        for (int cycle2 = 0; cycle2 < cycle; cycle2++) startNode = startNode->next;
-        startNodeOld = startNode;
-        while(startNode != NULL) {
-            if (startNode->wordLen < minLen) {
-                minLen = startNode->wordLen;
-                mem = startNode;
+    if (list->head != NULL) {
+        int minLen = defWordLen;
+        word_t *mem, *temp, *startNode, *startNodeOld;
+        word_t *wordNode = list->head;
+        while (wordNode != NULL) {
+            if (wordNode->wordLen < minLen) {
+                minLen = wordNode->wordLen;
+                mem = wordNode;
             }
-            startNode = startNode->next;
+            wordNode = wordNode->next;
         }
-        if (mem != startNodeOld) swap(startNodeOld, mem);
+        if (list->head != mem) {
+            list->head->prev = mem->prev;
+            mem->prev->next = list->head;
+            if (mem->next != NULL) mem->next->prev = list->head;
+            temp = list->head->next;
+            list->head->next = mem->next;
+            list->head = mem;
+            mem->prev = NULL;
+            mem->next = temp;
+            mem->next->prev = mem;
+        }
+        for (int cycle = 1; cycle < list->size; cycle++) {
+            startNode = list->head;
+            minLen = defWordLen;
+            for (int cycle2 = 0; cycle2 < cycle; cycle2++) startNode = startNode->next;
+            startNodeOld = startNode;
+            while (startNode != NULL) {
+                if (startNode->wordLen < minLen) {
+                    minLen = startNode->wordLen;
+                    mem = startNode;
+                }
+                startNode = startNode->next;
+            }
+            if (mem != startNodeOld) swap(startNodeOld, mem);
+        }
     }
+}
+
+int checkSymb(char symb) {
+    if (symb == 'a' || symb == 'A') return 1;
+    if (symb == 'e' || symb == 'E') return 1;
+    if (symb == 'u' || symb == 'U') return 1;
+    if (symb == 'i' || symb == 'I') return 1;
+    if (symb == 'o' || symb == 'O') return 1;
+    if (symb == 'y' || symb == 'Y') return 1;
+    return 0;
 }
 
 void sortWords (list_t *mainList, list_t *uniqueList, list_t *notUniqueList) {
     word_t *wordNode = mainList->head;
+    char *word;
+    int i = 0, counter = 0;
     while (wordNode != NULL) {
-        if (wordNode->wordCount == 1) pushBack(uniqueList, wordNode->word, wordNode->wordLen, wordNode->wordCount);
-        else pushBack(notUniqueList, wordNode->word, wordNode->wordLen, wordNode->wordCount);
+        word = wordNode->word;
+        while (word[i] != 0) {
+            if (checkSymb(word[i++]) == 1) counter++;
+            if (counter > 1) {
+                pushFront(notUniqueList, wordNode->word, wordNode->wordLen, wordNode->wordCount);
+                break;
+            }
+        }
+        if (counter == 1) pushFront(uniqueList, wordNode->word, wordNode->wordLen, wordNode->wordCount);
+        else pushFront(notUniqueList, wordNode->word, wordNode->wordLen, wordNode->wordCount);
+        counter = 0;
+        i = 0;
         wordNode = wordNode->next;
     }
 }
@@ -186,6 +232,7 @@ void freeRam (list_t *list) {
 
 int main() {
     char wordString[defWordLen] = "";
+    printf("Please enter string: \n");
     fgets(wordString, defWordLen, stdin);
     list_t wordList;
     init(&wordList);
@@ -193,15 +240,16 @@ int main() {
     //part_2
     list_t uniqueWords, notUniqueWords;
     init(&uniqueWords); init(&notUniqueWords);
-    printList(&wordList);
     sortList(&wordList);
-    printf("\n");
-    printList(&wordList);
+    printf("Sorted list: ");
+    printList(&wordList, 1);
     sortWords(&wordList, &uniqueWords, &notUniqueWords);
-    printf("\n");
-    printList(&uniqueWords);
-    printf("\n");
-    printList(&notUniqueWords);
+    printf("Unique words: ");
+    //sortList(&uniqueWords);
+    printList(&uniqueWords, 0);
+    printf("Rest words: ");
+    //sortList(&notUniqueWords);
+    printList(&notUniqueWords, 0);
     freeRam(&wordList);
     return 0;
 }
