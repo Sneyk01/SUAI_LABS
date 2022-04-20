@@ -138,7 +138,7 @@ void BitArray::addNew(int value) {
             data_copy[i] = this->data[i];
 
         data_copy[new_size_ar - 1] = 0;                     //CLEAR NEW BYTE
-        delete this->data;
+        delete[] this->data;
         this->data = data_copy;
     }
 
@@ -166,9 +166,71 @@ void BitArray::delOne() {
         for (int i = 0; i < new_size_ar; i++)
             data_copy[i] = this->data[i];
 
-        delete this->data;
+        delete[] this->data;
         this->data = data_copy;
     }
 
     this->size_bit--;
+}
+
+
+char* BitArray::get() {
+    size_t size_ar = this->size_bit / 8;
+    if (this->size_bit % 8 != 0)
+        size_ar++;
+
+    char* new_arr = new char[size_ar];
+    for (int i = 0; i < size_ar; i++)
+        new_arr[i] = this->data[i];
+
+    return new_arr;
+}
+
+
+void BitArray::set(char* new_data, size_t bit_count) {
+    size_t size_ar = bit_count / 8;
+    if (bit_count % 8 != 0)
+        size_ar++;
+
+    char* new_data_copy = new char[size_ar];
+    for (int i = 0; i < size_ar; i++)
+        new_data_copy[i] = new_data[i];
+
+    delete[] this->data;
+    this->data = new_data_copy;
+    this->size_bit = bit_count;
+}
+
+
+void BitArray::enter_bit() {
+    int count = 0;
+    printf("Enter bit count:\n");
+    while (scanf("%d", &count) != 1) {
+        while (getchar() != '\n') {}
+        printf("Enter bit count:\n");
+    }
+
+    if (count < 1 || count > 32) {
+        printf("Data error!\n");
+        return;
+    }
+    // printf("(%d)\n", count);
+    BitArray new_array(count);
+    // new_array.printAll();
+    int el = 0;
+
+    for (int i = 0; i < count; i++) {
+        printf("Enter element %d:", i);
+        while (scanf("%d", &el) != 1) {
+            while (getchar() != '\n') {}
+            printf("Enter bit count:\n");
+        }
+        new_array.setOne(el, i);
+        // new_array.printAll();
+        // printf("%d %d\n", el, i);
+    }
+    //this->printAll();
+    //new_array.printAll();
+    //delete[] this->data;
+    this->set(new_array.data, count);
 }

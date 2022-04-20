@@ -16,9 +16,12 @@ public:
     void setOne (int value, int num);
     void setAll (int value);
     int getOne (int num);
-    void printAll ();
+    void printAll();
     void addNew (int value);
-    void delOne ();
+    void delOne();
+    char* get();
+    void set(char* new_data, size_t bit_count);
+    void enter_bit();
     ~BitArray();
 
 };
