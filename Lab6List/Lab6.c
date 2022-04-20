@@ -214,7 +214,7 @@ void sortWords (list_t *mainList, list_t *uniqueList, list_t *notUniqueList) {
         while (word[i] != 0) {
             if (checkSymb(word[i++]) == 1) counter++;
             if (counter > 1) {
-                pushFront(notUniqueList, wordNode->word, wordNode->wordLen, wordNode->wordCount);
+                //pushFront(notUniqueList, wordNode->word, wordNode->wordLen, wordNode->wordCount);
                 break;
             }
         }
@@ -234,8 +234,7 @@ void freeRam (list_t *list) {
         temp = wordNode;
         wordNode = wordNode->next;
         free(temp);
-    }
-}
+    }}
 
 int main() {
     char wordString[defWordLen] = "";
@@ -255,10 +254,10 @@ int main() {
     printList(&wordList, 1);
     sortWords(&wordList, &uniqueWords, &notUniqueWords);
     printf("Unique words: ");
-    //sortList(&uniqueWords);
+    sortList(&uniqueWords);
     printList(&uniqueWords, 0);
     printf("Rest words: ");
-    //sortList(&notUniqueWords);
+    sortList(&notUniqueWords);
     printList(&notUniqueWords, 0);
     freeRam(&wordList);
     fclose(fileTest);

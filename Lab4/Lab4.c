@@ -77,7 +77,7 @@ int main() {
     char a[10000] = "";
     double nums[10000] = {0};
     printf("Enter string (max 10000 symb)\n");
-    fgets(&a, 10000, stdin);
+    fgets(a, 10000, stdin);
 
     while (a[i] != 0) {
         if (a[i] == '-') {
