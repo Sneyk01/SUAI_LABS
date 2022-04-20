@@ -14,8 +14,11 @@ private:
 public:
     BitArray (int size);
     void setOne (int value, int num);
+    void setAll (int value);
     int getOne (int num);
     void printAll ();
+    void addNew (int value);
+    void delOne ();
     ~BitArray();
 
 };

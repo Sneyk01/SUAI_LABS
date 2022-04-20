@@ -37,14 +37,19 @@ BitArray::~BitArray() {
 
 
 void BitArray::setOne(int value, int num) {
+    if (this->data == nullptr) {
+        printf("Data error!\n");
+        return;
+    }
+
     if (num > -1 && num < this->size_bit) {
         if (value < 0) {
             printf("Value error!\n");
             return;
         }
 
-        unsigned char mask = 1 << num;
-        // printf("(mask - %d)\n", mask);
+        unsigned char mask = 1 << (num % 8);
+        //printf("(mask - %d)\n", mask);
 
         int num_ar = num / 8;
 
@@ -66,9 +71,14 @@ void BitArray::setOne(int value, int num) {
 
 
 int BitArray::getOne(int num) {
+    if (this->data == nullptr) {
+        printf("Data error!\n");
+        return -1;
+    }
+
     if (num > -1 && num < this->size_bit) {
         int num_ar = num / 8;
-        unsigned char mask = 1 << num;
+        unsigned char mask = 1 << (num % 8);
         unsigned char res = this->data[num_ar] & mask;
         if (res > 0) return 1;
         else return 0;
@@ -80,7 +90,85 @@ int BitArray::getOne(int num) {
 
 
 void BitArray::printAll() {
+    if (this->data == nullptr) {
+        printf("Data error!\n");
+        return;
+    }
+
     for (int i = 0; i < this->size_bit; i++)
         printf("%d", this->getOne(i));
     printf("\n");
+}
+
+
+void BitArray::setAll(int value) {
+    //printf("%d\n", this->size_bit);
+    if (this->data == nullptr) {
+        printf("Data error!\n");
+        return;
+    }
+
+    if (value < 0) {
+        printf("Value error!\n");
+        return;
+    }
+
+    for (int i = 0; i < this->size_bit; i++)
+        setOne(value, i);
+}
+
+
+void BitArray::addNew(int value) {
+    if (this->size_bit > 31) {
+        printf("Data error!\n");
+        return;
+    }
+
+    if (this->data == nullptr) {
+    BitArray temp(1);
+    this->data = temp.data;
+    this->size_bit = temp.size_bit;
+    return;
+    }
+
+    if (this->size_bit % 8 == 0) {                          //NEED NEW BYTE
+        size_t new_size_ar = (this->size_bit / 8) + 1;      // 16 bit -> 17 bit => 2 byte -> 3 byte
+        char* data_copy = new char [new_size_ar];           //                    [0,1]     [0,1,2]
+        for (int i = 0; i < (new_size_ar - 1); i++)
+            data_copy[i] = this->data[i];
+
+        data_copy[new_size_ar - 1] = 0;                     //CLEAR NEW BYTE
+        delete this->data;
+        this->data = data_copy;
+    }
+
+    this->size_bit++;
+    this->setOne(value, this->size_bit - 1);
+}
+
+
+void BitArray::delOne() {
+    if (this->size_bit < 1 || this->data == nullptr) {
+        printf("Data error!\n");
+        return;
+    }
+
+    if (this->size_bit % 8 == 1) {                          //NEED DEL BYTE
+        size_t new_size_ar = this->size_bit / 8;            // 17 bit -> 16 bit => 3 byte -> 2 byte
+                                                            //                     [0,1,2]  [0,1]
+        if (new_size_ar == 0) {
+            this->data = nullptr;
+            this->size_bit = 0;
+            return;
+        }
+
+        char* data_copy = new char [new_size_ar];
+        for (int i = 0; i < new_size_ar; i++)
+            data_copy[i] = this->data[i];
+
+        delete this->data;
+        this->data = data_copy;
+    }
+
+    this->size_bit--;
 }
