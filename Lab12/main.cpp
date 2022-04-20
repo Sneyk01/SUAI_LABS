@@ -3,7 +3,7 @@
 int main() {
     int size_ar = 9;
 
-    BitArray a(9);
+    BitArray a;
     a.enter_bit();
     a.printAll();
 
@@ -15,8 +15,6 @@ int main() {
 
     a.delOne();
     a.printAll();
-
-
 
     return 0;
 }

@@ -12,6 +12,7 @@ private:
     char *data;
     size_t size_bit;
 public:
+    BitArray ();
     BitArray (int size);
     void setOne (int value, int num);
     void setAll (int value);

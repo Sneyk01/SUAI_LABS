@@ -4,6 +4,11 @@
 
 #include "lib.h"
 
+BitArray::BitArray() {
+    this->data = nullptr;
+    this->size_bit = 0;
+}
+
 
 BitArray::BitArray(int size) {
     int size_ar = 0;
@@ -23,8 +28,8 @@ BitArray::BitArray(int size) {
 
     else {
         printf("Value is out of size off limits\n");
-        *data = NULL;
-        size_bit = 0;
+        this->data = nullptr;
+        this->size_bit = 0;
     }
 
     // printf("_%lu\n\n", data[0]);
@@ -215,7 +220,14 @@ void BitArray::enter_bit() {
         return;
     }
     // printf("(%d)\n", count);
-    BitArray new_array(count);
+    //BitArray new_array(count);
+    this->size_bit = count;
+    size_t size_ar = count / 8;
+    if (count % 8 != 0)
+        size_ar++;
+    char* new_array = new char[size_ar];
+    delete[] this->data;
+    this->data = new_array;
     // new_array.printAll();
     int el = 0;
 
@@ -223,14 +235,15 @@ void BitArray::enter_bit() {
         printf("Enter element %d:", i);
         while (scanf("%d", &el) != 1) {
             while (getchar() != '\n') {}
-            printf("Enter bit count:\n");
+            printf("Enter element %d:\n", i);
         }
-        new_array.setOne(el, i);
+        this->setOne(el, i);
+
         // new_array.printAll();
         // printf("%d %d\n", el, i);
     }
     //this->printAll();
     //new_array.printAll();
     //delete[] this->data;
-    this->set(new_array.data, count);
+    //this->set(new_array.data, count);
 }
