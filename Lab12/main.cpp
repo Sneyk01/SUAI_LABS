@@ -1,10 +1,8 @@
 #include "lib.h"
 
 int main() {
-    int size_ar = 9;
 
-    BitArray a;
-    a.enter_bit();
+    BitArray a(9);
     a.printAll();
 
     a.addNew(1);

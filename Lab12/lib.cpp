@@ -10,7 +10,22 @@ BitArray::BitArray() {
 }
 
 
-BitArray::BitArray(int size) {
+BitArray::BitArray(unsigned char value) {
+    int deg = 0;
+    this->data = new char[1];
+    this->data[0] = value;
+    while (value > 0) {
+        value /= 2;
+        deg++;
+    }
+
+    if (deg == 0)
+        deg++;
+
+    this->size_bit = deg;
+}
+
+/* BitArray::BitArray(int size) {
     int size_ar = 0;
     if (size > 0 && size < 33) {
         size_ar = size / 8;
@@ -18,11 +33,11 @@ BitArray::BitArray(int size) {
             size_ar++;
 
         //printf("Array size - %d\n", size_ar);
-        data = new char [size_ar];
-        size_bit = size;
+        this->data = new char [size_ar];
+        this->size_bit = size;
 
         for (int i = 0; i < size_ar; i++)
-            data[i] = 0;
+            this->data[i] = 0;
 
     }
 
@@ -33,7 +48,7 @@ BitArray::BitArray(int size) {
     }
 
     // printf("_%lu\n\n", data[0]);
-}
+} */
 
 
 BitArray::~BitArray() {

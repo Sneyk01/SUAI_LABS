@@ -13,7 +13,7 @@ private:
     size_t size_bit;
 public:
     BitArray ();
-    BitArray (int size);
+    BitArray (unsigned char value);
     void setOne (int value, int num);
     void setAll (int value);
     int getOne (int num);
