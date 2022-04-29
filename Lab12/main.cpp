@@ -2,8 +2,10 @@
 
 int main() {
 
-    BitArray a(9);
+    BitArray a(9568);
     a.printAll();
+    a.printAllRevers();
+    printf("\n");
 
     a.addNew(1);
     a.printAll();

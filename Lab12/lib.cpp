@@ -10,19 +10,34 @@ BitArray::BitArray() {
 }
 
 
-BitArray::BitArray(unsigned char value) {
-    int deg = 0;
-    this->data = new char[1];
-    this->data[0] = value;
-    while (value > 0) {
-        value /= 2;
+BitArray::BitArray(unsigned int value) {
+    int deg = 0, size_ar = 0;
+    unsigned int temp = value;
+
+    while (temp > 0) {                          // bit count
+        temp /= 2;
         deg++;
     }
 
     if (deg == 0)
         deg++;
 
+    size_ar = deg / 8;                          // char count
+    if (deg % 8 != 0)
+        size_ar++;
+
+    this->data = new char [size_ar];
     this->size_bit = deg;
+
+    unsigned int mask, bit_value;
+
+    for (int i = 0; i < deg; i++) {
+        mask = 1 << i;
+        bit_value = value & mask;
+        if (bit_value > 0) bit_value = 1;
+
+        this->setOne(bit_value, i);
+    }
 }
 
 /* BitArray::BitArray(int size) {
@@ -261,4 +276,17 @@ void BitArray::enter_bit() {
     //new_array.printAll();
     //delete[] this->data;
     //this->set(new_array.data, count);
+}
+
+
+void BitArray::printAllRevers() {
+    if (this->data == nullptr) {
+        printf("Data error!\n");
+        return;
+    }
+
+    printf("(");
+    for (int i = size_bit - 1; i > -1; i--)
+        printf("%d", this->getOne(i));
+    printf(")\n");
 }

@@ -13,11 +13,12 @@ private:
     size_t size_bit;
 public:
     BitArray ();
-    BitArray (unsigned char value);
+    BitArray (unsigned int value);
     void setOne (int value, int num);
     void setAll (int value);
     int getOne (int num);
     void printAll();
+    void printAllRevers();
     void addNew (int value);
     void delOne();
     char* get();
