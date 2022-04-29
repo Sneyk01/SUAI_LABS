@@ -285,8 +285,7 @@ void BitArray::printAllRevers() {
         return;
     }
 
-    printf("(");
     for (int i = size_bit - 1; i > -1; i--)
         printf("%d", this->getOne(i));
-    printf(")\n");
+    printf("\n");
 }

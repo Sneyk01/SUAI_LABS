@@ -4,6 +4,8 @@ int main() {
 
     BitArray a(9568);
     a.printAll();
+
+    printf("\nRevers output:");
     a.printAllRevers();
     printf("\n");
 
