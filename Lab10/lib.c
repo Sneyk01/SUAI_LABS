@@ -45,13 +45,13 @@ int smart_space(const char* symbol, int direction) {
         flag = 2;
     if (*symbol == '=' && prev_symbol == '=')
         flag = 2;
-    if (*symbol == '+' && prev_symbol == '=')
+    if (*symbol == '=' && prev_symbol == '+')
         flag = 2;
-    if (*symbol == '-' && prev_symbol == '=')
+    if (*symbol == '=' && prev_symbol == '-')
         flag = 2;
-    if (*symbol == '*' && prev_symbol == '=')
+    if (*symbol == '=' && prev_symbol == '*')
         flag = 2;
-    if (*symbol == '/' && prev_symbol == '=')
+    if (*symbol == '=' && prev_symbol == '/')
         flag = 2;
     if (*symbol == '=' && prev_symbol == '<')
         flag = 2;
@@ -61,22 +61,28 @@ int smart_space(const char* symbol, int direction) {
         flag = 2;
     if (*symbol == '|' && prev_symbol == '|')
         flag = 2;
+    //if (*(symbol - 1) == '=' && *symbol == '-')
+    //    flag = 1;
 
     if (direction == 1) {
-        if (*symbol == '=' && prev_symbol == '+')
-            flag = 2;
-        if (*symbol == '=' && prev_symbol == '-')
-            flag = 2;
-        if (*symbol == '=' && prev_symbol == '*')
-            flag = 2;
-        if (*symbol == '=' && prev_symbol == '/')
-            flag = 2;
+        if (*symbol == '+' && prev_symbol == '=')
+            flag = 0;
+        if (*symbol == '-' && prev_symbol == '=')
+            flag = 0;
+        if (*symbol == '*' && prev_symbol == '=')
+            flag = 0;
+        if (*symbol == '/' && prev_symbol == '=')
+            flag = 0;
         if (*symbol == '<' && prev_symbol == '=')
-            flag = 2;
+            flag = 0;
         if (*symbol == '>' && prev_symbol == '=')
-            flag = 2;
+            flag = 0;
         if (*symbol == '!' && prev_symbol == '=')
-            flag = 2;
+            flag = 0;
+        if (*(symbol - 2) == '=' && *symbol == '-')     // for -numbers
+            flag = 0;
+        if (*(symbol - 1) == '=' && *symbol == '-')     // for -numbers
+            flag = 0;
     }
 
     //printf("%p|%p ", strstr(symbol - 3, "int"), symbol - 3);
@@ -101,21 +107,21 @@ int smart_space(const char* symbol, int direction) {
 
     if ((direction == 1) && (*symbol == '*')) {
         if (save_pointer(symbol, "int", 4))
-            flag = 2;
+            flag = 0;
         if (save_pointer(symbol, "char", 5))
-            flag = 2;
+            flag = 0;
         if (save_pointer(symbol, "void", 5))
-            flag = 2;
+            flag = 0;
         if (save_pointer(symbol, "bool", 5))
-            flag = 2;
+            flag = 0;
         if (save_pointer(symbol, "long", 5))
-            flag = 2;
+            flag = 0;
         if (save_pointer(symbol, "short", 6))
-            flag = 2;
+            flag = 0;
         if (save_pointer(symbol, "float", 6))
-            flag = 2;
+            flag = 0;
         if (save_pointer(symbol, "double", 7))
-            flag = 2;
+            flag = 0;
     }
 
     return flag;
