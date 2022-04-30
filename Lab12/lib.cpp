@@ -29,6 +29,9 @@ BitArray::BitArray(unsigned int value) {
     this->data = new char [size_ar];
     this->size_bit = deg;
 
+    for (int i = 0; i < size_ar; i++)
+        this->data[i] = 0;
+
     unsigned int mask, bit_value;
 
     for (int i = 0; i < deg; i++) {
@@ -160,9 +163,11 @@ void BitArray::addNew(int value) {
     }
 
     if (this->data == nullptr) {
-    BitArray temp(1);
-    this->data = temp.data;
-    this->size_bit = temp.size_bit;
+    char* new_data = new char[1];
+    new_data[0] = 0;
+    this->data = new_data;
+    this->size_bit = 1;
+    this->setOne(value, 0);
     return;
     }
 
