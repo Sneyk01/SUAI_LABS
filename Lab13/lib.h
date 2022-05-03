@@ -19,12 +19,12 @@ public:
     String operator+(const String& src);
     void operator+=(const String& src);
     String& operator=(const String& src);
-    bool operator==(const String& src);
-    bool operator!=(const String& src);
-    bool operator>(const String& src);
-    bool operator<(const String& src);
-    bool operator>=(const String& src);
-    bool operator<=(const String& src);
+    bool operator==(const String& src) const;
+    bool operator!=(const String& src) const;
+    bool operator>(const String& src) const;
+    bool operator<(const String& src) const;
+    bool operator>=(const String& src) const;
+    bool operator<=(const String& src) const;
     ~String();
 };
 

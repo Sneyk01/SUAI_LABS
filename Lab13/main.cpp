@@ -13,8 +13,13 @@ int main() {
 
     String c;
     c = a + b;
-    b = a;
+    b += a;
+    printf("%s | ", a.get());
     printf("%s\n", b.get());
-    printf("%s", c.get());
+    printf("%d\n", a <= b);
+
+    b = a;
+    printf("%d\n", b == a);
+
     return 0;
 }

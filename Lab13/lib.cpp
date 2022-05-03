@@ -77,12 +77,68 @@ String String::operator+(const String &src) {
 }
 
 
+void String::operator+=(const String &src) {
+    *this = *this + src;
+}
+
+
 String& String::operator=(const String &src) {
     if (&src == this)
         return *this;
 
     this->set(src.data);
     return *this;
+}
+
+
+bool String::operator<(const String &src) const {
+   char* symb1 = this->data;
+   char* symb2 = src.data;
+
+   while ((*symb1 != 0) && (*symb1 == *symb2)) {
+       symb1++;
+       symb2++;
+   }
+
+   if ((*symb1 - *symb2) < 0)
+       return true;
+
+   return false;
+}
+
+
+bool String::operator>(const String &src) const {
+    return src<*this;
+}
+
+
+bool String::operator==(const String &src) const {
+    char* symb1 = this->data;
+    char* symb2 = src.data;
+
+    while ((*symb1 != 0) && (*symb1 == *symb2)) {
+        symb1++;
+        symb2++;
+    }
+
+    if ((*symb1 - *symb2) == 0)
+        return true;
+
+    return false;
+}
+
+bool String::operator!=(const String &src) const {
+    return !(*this == src);
+}
+
+
+bool String::operator<=(const String &src) const {
+    return !(*this > src);
+}
+
+
+bool String::operator>=(const String &src) const {
+    return !(*this < src);
 }
 
 
