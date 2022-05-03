@@ -5,7 +5,9 @@
 #ifndef LAB12_LIB_H
 #define LAB12_LIB_H
 
+
 #include <iostream>
+
 
 class BitArray {
 private:
