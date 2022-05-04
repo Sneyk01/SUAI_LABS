@@ -2,8 +2,19 @@
 
 
 int main() {
-    //std::cout << "Hello, World!" << std::endl;
     String a;
+    std::cout << "Enter String: \n";
+    std::cin >> a;
+    //a.set("Hello world");
+    std::cout << a;
+
+    String b;
+    b.set(" It is a super code!");
+    printf("%s\n", b.get());
+
+    a = b;
+    std::cout << a;
+    /*
     a.set("Hello world");
     printf("%s\n", a.get());
 
@@ -20,6 +31,6 @@ int main() {
 
     b = a;
     printf("%d\n", b == a);
-
+    */
     return 0;
 }

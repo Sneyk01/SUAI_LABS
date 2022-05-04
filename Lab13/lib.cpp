@@ -20,6 +20,12 @@ String::String(String &a) {
 
 
 void String::set(char* src) {
+    if (src == nullptr || *src == 0) {
+        this->data = nullptr;
+        this->len = 0;
+        return;
+    }
+
     int i = 0, len_str = 0;
     while (src[i] != '\n' && src[i] != '\0')
         i++;
@@ -92,6 +98,11 @@ String& String::operator=(const String &src) {
 
 
 bool String::operator<(const String &src) const {
+    if (src.len == 0 || this->len == 0) {
+        printf("The string is empty!\n");
+        return false;
+    }
+
    char* symb1 = this->data;
    char* symb2 = src.data;
 
@@ -108,11 +119,21 @@ bool String::operator<(const String &src) const {
 
 
 bool String::operator>(const String &src) const {
+    if (src.len == 0 || this->len == 0) {
+        printf("The string is empty!\n");
+        return false;
+    }
+
     return src<*this;
 }
 
 
 bool String::operator==(const String &src) const {
+    if (src.len == 0 || this->len == 0) {
+        printf("The string is empty!\n");
+        return false;
+    }
+
     char* symb1 = this->data;
     char* symb2 = src.data;
 
@@ -128,20 +149,75 @@ bool String::operator==(const String &src) const {
 }
 
 bool String::operator!=(const String &src) const {
+    if (src.len == 0 || this->len == 0) {
+        printf("The string is empty!\n");
+        return false;
+    }
+
     return !(*this == src);
 }
 
 
 bool String::operator<=(const String &src) const {
+    if (src.len == 0 || this->len == 0) {
+        printf("The string is empty!\n");
+        return false;
+    }
+
     return !(*this > src);
 }
 
 
 bool String::operator>=(const String &src) const {
+    if (src.len == 0 || this->len == 0) {
+        printf("The string is empty!\n");
+        return false;
+    }
+
     return !(*this < src);
 }
 
 
 String::~String() {
     delete[] this->data;
+}
+
+
+std::ostream& operator<< (std::ostream &out,const String &src) {
+    if (src.data == nullptr || *src.data == 0) {
+        out << "The string is empty!\n";
+        return out;
+    }
+
+    out << "___\nString: " << src.data << "\nlen: " << src.len << "\n___\n";
+    return out;
+}
+
+
+std::istream& operator>> (std::istream &in, String &src) {
+    char* new_data = nullptr;
+    char* temp = nullptr;
+    char new_symb;
+    int len = 1;
+
+    while ((new_symb = in.get()) != '\n') {
+        len++;
+        temp = new char[len];
+        temp[len - 2] = new_symb;
+        temp[len - 1] = 0;
+
+        if (new_data != nullptr)
+            for (int i = 0; i < len - 2; i++)
+                temp[i] = new_data[i];
+
+        delete[] new_data;
+        new_data = temp;
+    }
+
+
+    //printf("|%s|\n", new_data);
+    src.set(new_data);
+    delete(new_data);
+
+    return in;
 }

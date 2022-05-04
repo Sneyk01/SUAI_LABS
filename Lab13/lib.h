@@ -6,6 +6,7 @@
 #define LAB13_LIB_H
 
 #include <iostream>
+#include <string>
 
 class String {
 private:
@@ -25,6 +26,9 @@ public:
     bool operator<(const String& src) const;
     bool operator>=(const String& src) const;
     bool operator<=(const String& src) const;
+    friend std::ostream& operator<< (std::ostream &out, const String &src);
+    friend std::istream& operator>> (std::istream &in, String &src);
+    //String& operator>>(String& src);
     ~String();
 };
 
