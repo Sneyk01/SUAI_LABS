@@ -129,7 +129,7 @@ int smart_space(const char* symbol, int direction) {
 
 
 void analyze_string(const char *src, FILE* output) {
-    int i = 0, i2 = 0, i3 = 0, first_symbol = 1, check_prev = 0, spec = 0, res = 0, grid = 0;
+    int i = 0, i2 = 0, i3 = 0, first_symbol = 1, check_prev = 0, spec = 0, res = 0, grid = 0, space_flag = 0, next_symb;
     char cur_symbol, *cur_pointer, *prev_pointer, new_string[1000];
 
     while (src[i] != 0 && src[i] != '\n') {
@@ -168,7 +168,69 @@ void analyze_string(const char *src, FILE* output) {
 
         if (grid == 1 && cur_symbol == '<' && *(cur_pointer - 1) != ' ')    // #<
             new_string[i3++] = ' ';
-        new_string[i3++] = cur_symbol;
+
+        //______NEW CODE______
+        space_flag = 0;
+        next_symb = 1;
+
+        if (cur_symbol == ' ' && first_symbol == 0) {
+            while (*(cur_pointer + next_symb) == ' ')
+                next_symb++;                                //skip rows of space
+            i += next_symb - 1;                             // + 1 have already done
+
+            if (*(cur_pointer - 1) == ' ' || *(cur_pointer - 1) == '\t')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '/' && *(cur_pointer + next_symb) == '/')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '+' && *(cur_pointer + next_symb) == '+')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '-' && *(cur_pointer + next_symb) == '-')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '+' && *(cur_pointer + next_symb) == '=')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '-' && *(cur_pointer + next_symb) == '=')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '*' && *(cur_pointer + next_symb) == '=')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '/' && *(cur_pointer + next_symb) == '=')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '!' && *(cur_pointer + next_symb) == '=')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '<' && *(cur_pointer + next_symb) == '=')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '>' && *(cur_pointer + next_symb) == '=')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '=' && *(cur_pointer + next_symb) == '=')
+                space_flag = 1;
+
+            if (*(cur_pointer - 1) == '|' && *(cur_pointer + next_symb) == '|')
+                space_flag = 1;
+
+            if (space_flag == 0)
+                new_string[i3++] = cur_symbol;
+
+        }
+
+        if (cur_symbol == ' ' && first_symbol == 1)
+            new_string[i3++] = cur_symbol;
+
+        if (cur_symbol != ' ')
+            new_string[i3++] = cur_symbol;
+
+
+
+        //_____NEW CODE_______
 
         if (cur_symbol == '"')
             spec++;                         // Don't touch the body string

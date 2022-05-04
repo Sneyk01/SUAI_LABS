@@ -9,7 +9,7 @@
 #include <string.h>
 
 static const char PATH[] = "D:\\Project\\C\\Lab10\\test.c";
-static const char SYMBOLS_DATA[] = "+-*/%={}<>&!|\0";
+static const char SYMBOLS_DATA[] = "+-*/%={}<>&!|";
 
 FILE* open_file(char *path);
 void analyze_string(const char* src, FILE* output);
