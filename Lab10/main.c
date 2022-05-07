@@ -3,6 +3,7 @@
 int main() {
     FILE *src = open_file(PATH);
     FILE *output = fopen("D:\\Project\\C\\Lab10\\test_copy.c", "wt");
+
     if (src == -1) return -1;
 
     char *cur_string;
