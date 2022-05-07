@@ -15,20 +15,30 @@ private:
 public:
     String();
     String(String& a);
+    String(int a);
+    String(char a);
+    String(float a);
+    String(double a);
+    String(bool a);
+    String(const char* a);
+
     void set(char* src);
     char* get();
     String operator+(const String& src);
     void operator+=(const String& src);
     String& operator=(const String& src);
-    bool operator==(const String& src) const;
-    bool operator!=(const String& src) const;
-    bool operator>(const String& src) const;
-    bool operator<(const String& src) const;
-    bool operator>=(const String& src) const;
-    bool operator<=(const String& src) const;
+
+
+    friend bool operator==(const String& a, const String& b);
+    friend bool operator!=(const String& a, const String& b);
+    friend bool operator>(const String& a, const String& b);
+    friend bool operator<(const String& a, const String& b);
+    friend bool operator>=(const String& a, const String& b);
+    friend bool operator<=(const String& a, const String& b);
+
     friend std::ostream& operator<< (std::ostream &out, const String &src);
     friend std::istream& operator>> (std::istream &in, String &src);
-    //String& operator>>(String& src);
+
     ~String();
 };
 

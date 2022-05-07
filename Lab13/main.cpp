@@ -2,18 +2,27 @@
 
 
 int main() {
-    String a;
-    std::cout << "Enter String: \n";
-    std::cin >> a;
-    //a.set("Hello world");
-    std::cout << a;
+    float f =356.14;
+    String a(f);
 
+    a += ' ';
+    a += (bool)0;
+    a += 3116.14152342;
+    a += 5;
+    a += "ABFD";
+
+    std::cout << a;
+    /*
     String b;
-    b.set(" It is a super code!");
-    printf("%s\n", b.get());
+    b.set(" Hello world!");
 
+    printf("%s\n", b.get());
     a = b;
+
     std::cout << a;
+
+    //printf("\n| %d |\n", a == b);
+    */
     /*
     a.set("Hello world");
     printf("%s\n", a.get());
