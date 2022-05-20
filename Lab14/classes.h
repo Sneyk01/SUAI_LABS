@@ -23,7 +23,7 @@ public:
     Animal();
     Animal(const Animal& src);
     Animal(char* animal_name, unsigned int animal_old);
-    ~Animal();
+    virtual ~Animal();
     //Animal& operator=(const Animal& src);
     virtual void print_animal();            // А можно ли вызвать часть от сюда и часть из потомка?
     virtual void paint() {}
@@ -44,7 +44,7 @@ public:
     virtual void paint();           //  Тут virtual нужен по синт. или для будущего наслед?
     Goose& operator=(const Goose& src);
     virtual void print_animal();
-    ~Goose();
+    virtual ~Goose();
 };
 
 
@@ -58,7 +58,7 @@ public:
     virtual void paint();
     Penguin& operator=(const Penguin& src);
     virtual void print_animal();
-    ~Penguin();
+    virtual ~Penguin();
 };
 
 
@@ -73,7 +73,7 @@ public:
     virtual void paint();
     Ostrich& operator=(const Ostrich& src);
     virtual void print_animal();
-    ~Ostrich();
+    virtual ~Ostrich();
 };
 
 

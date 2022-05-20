@@ -134,6 +134,8 @@ Goose::Goose(const Goose &src) : Animal(src) {
 
 
 Goose::~Goose() {
+    //delete[] name;
+
     delete[] this->legs_color;
     delete[] this->wings_color;
     delete[] this->body_color;
@@ -232,6 +234,7 @@ void Penguin::print_animal(){
 
 
 Penguin::~Penguin() {
+    delete[] name;
     delete[] this->body_color;
 }
 
@@ -290,6 +293,7 @@ void Ostrich::print_animal(){
 
 
 Ostrich::~Ostrich() {
+    //delete[] name;
     delete[] this->legs_color;
     delete[] this->wings_color;
 }
@@ -348,12 +352,17 @@ void Farm::paint_all_animals() {
 void Farm::delete_animal() {
     if (this->free_ind == 0)
         return;
-    this->Animals[this->free_ind - 1] = nullptr; // a[1] = o & a[2] = o -> error, класс удалит сам себя в конце?
+    //this->Animals[this->free_ind - 1] = nullptr; // a[1] = o & a[2] = o -> error, класс удалит сам себя в конце?
+    //std::cout<<"\n\n";
+    //this->Animals[this->free_ind-1]->print_animal();
+    delete this->Animals[this->free_ind-1];
     this->free_ind--;
 }
 
 
 Farm::~Farm() {
-    delete Animals;             // Зачем в примере for с delete, если для всех классов будут свои диструкторы далее
+    for (int i = 0; i < free_ind; i++)
+        delete Animals[i];             // Зачем в примере for с delete, если для всех классов будут свои диструкторы далее
+    delete[] Animals;
 }
 
