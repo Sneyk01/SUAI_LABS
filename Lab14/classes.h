@@ -10,68 +10,86 @@
 
 
 char* str_copy (const char* src);
-
-/*class Farm {
-private:
-public:
-    void add_new_animal();
-    void delete_animal();
-    void show_all_animals();
-    void paint_all_animals(char* color);
-};
-*/
+char* enter_color();
 
 
-class Goose {
-private:
+class Animal {
+protected:
     int num;
     static int last_num;
     char* name;
     unsigned int old;
+public:
+    Animal();
+    Animal(const Animal& src);
+    Animal(char* animal_name, unsigned int animal_old);
+    ~Animal();
+    //Animal& operator=(const Animal& src);
+    virtual void print_animal();            // А можно ли вызвать часть от сюда и часть из потомка?
+    virtual void paint() {}
+};
+
+
+class Goose: public Animal{
+protected:
     char* legs_color;
     char* wings_color;
     char* body_color;
 public:
-    Goose ();
-    Goose (const Goose& a);
-    Goose (char* goose_name, unsigned int goose_old, char* goose_legs_color, char* goose_wings_color, char* goose_body_color);
-    void paint(char* new_legs_color, char* new_wings_color, char* new_body_color);
+    Goose();
+    Goose (const Goose& a);         // А надо ли? В примерах конструктора копий не было
+    Goose (char* goose_name, unsigned int goose_old,
+           char* goose_legs_color, char* goose_wings_color, char* goose_body_color);
+
+    virtual void paint();           //  Тут virtual нужен по синт. или для будущего наслед?
     Goose& operator=(const Goose& src);
+    virtual void print_animal();
     ~Goose();
 };
 
 
-class Penguin{
+class Penguin: public Animal{
 private:
-    int num;
-    static int last_num;
-    char* name;
-    unsigned int old;
     char* body_color;
 public:
     Penguin();
     Penguin(const Penguin& src);
     Penguin(char* penguin_name, unsigned int penguin_old, char* penguin_body_color);
-    void paint_black();
+    virtual void paint();
     Penguin& operator=(const Penguin& src);
+    virtual void print_animal();
     ~Penguin();
 };
 
 
-class Ostrich {
+class Ostrich: public Animal{
 private:
-    int num;
-    static int last_num;
-    char* name;
-    unsigned int old;
     char* legs_color;
     char* wings_color;
 public:
     Ostrich();
     Ostrich(const Ostrich& src);
     Ostrich(char* ostrich_name, unsigned int ostrich_old, char* ostrich_legs_color, char* ostrich_wings_color);
-    void paint_legs_as_wings();
+    virtual void paint();
     Ostrich& operator=(const Ostrich& src);
+    virtual void print_animal();
     ~Ostrich();
 };
+
+
+class Farm {
+protected:
+    Animal** Animals;
+    size_t free_ind;
+    size_t size;
+public:
+    Farm();
+    Farm(size_t size);
+    void add_new_animal(Animal* a);
+    void delete_animal();
+    void show_all_animals();
+    void paint_all_animals();
+    ~Farm();
+};
+
 #endif //LAB14_CLASSES_H
