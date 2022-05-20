@@ -165,3 +165,73 @@ Penguin::~Penguin() {
     delete[] this->name;
     delete[] this->body_color;
 }
+
+
+//_______ OSTRICH _______
+
+
+int Ostrich::last_num = 0;
+
+
+Ostrich::Ostrich() {
+    this->num = 0;
+
+    this->name = nullptr;
+    this->legs_color = nullptr;
+    this->wings_color = nullptr;
+
+    this->old = 0;
+}
+
+
+Ostrich::Ostrich(char *ostrich_name, unsigned int ostrich_old, char *ostrich_legs_color, char *ostrich_wings_color) {
+    this->num = Ostrich::last_num + 1;
+    Ostrich::last_num++;
+
+    this->name = str_copy(ostrich_name);
+    this->legs_color = str_copy(ostrich_legs_color);
+    this->wings_color = str_copy(ostrich_wings_color);
+
+    this->old = ostrich_old;
+}
+
+
+Ostrich::Ostrich(const Ostrich& src) {
+    this->num = src.num;
+    this->old = src.old;
+
+    this->name = str_copy(src.name);
+    this->legs_color = str_copy(src.legs_color);
+    this->wings_color = str_copy(src.wings_color);
+}
+
+
+void Ostrich::paint_legs_as_wings() {
+    delete[] this->legs_color;
+    this->legs_color = str_copy(this->wings_color);
+}
+
+
+Ostrich& Ostrich::operator=(const Ostrich &src) {
+    if (&src == this)
+        return *this;
+
+    delete[] this->name;
+    delete[] this->legs_color;
+    delete[] this->wings_color;
+
+    this->num = src.num;
+    this->old = src.old;
+
+    this->name = str_copy(src.name);
+    this->legs_color = str_copy(src.legs_color);
+    this->wings_color = str_copy(src.wings_color);
+
+    return *this;
+}
+
+Ostrich::~Ostrich() {
+    delete[] this->name;
+    delete[] this->legs_color;
+    delete[] this->wings_color;
+}

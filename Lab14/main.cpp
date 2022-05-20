@@ -9,5 +9,7 @@ int main() {
     Penguin p("Kavalski", 3, "white");
     Penguin p2;
     p2 = p;
+    Ostrich o("Ilya", 10, "pink", "white");
+    o.paint_legs_as_wings();
     return 0;
 }

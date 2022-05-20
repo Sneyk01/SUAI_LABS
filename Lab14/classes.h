@@ -58,4 +58,20 @@ public:
 };
 
 
+class Ostrich {
+private:
+    int num;
+    static int last_num;
+    char* name;
+    unsigned int old;
+    char* legs_color;
+    char* wings_color;
+public:
+    Ostrich();
+    Ostrich(const Ostrich& src);
+    Ostrich(char* ostrich_name, unsigned int ostrich_old, char* ostrich_legs_color, char* ostrich_wings_color);
+    void paint_legs_as_wings();
+    Ostrich& operator=(const Ostrich& src);
+    ~Ostrich();
+};
 #endif //LAB14_CLASSES_H
