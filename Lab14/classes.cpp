@@ -9,14 +9,14 @@ char* str_copy (const char* src) {
     if (src == nullptr)
         return nullptr;
 
-    int len = 0;
-    while (src[len] != 0 && src[len] != '\n')
-        len++;
+    //int len = 0;
+    //while (src[len] != 0 && src[len] != '\n')
+    //    len++;
 
-    char* new_data = new char[len + 1];
-
-    for (int i = 0; i <= len; i++)
-        new_data[i] = src[i];
+    char* new_data = new char[strlen(src) + 1];
+    strcpy(new_data, src);
+    //for (int i = 0; i <= len; i++)
+    //    new_data[i] = src[i];
 
     return new_data;
 }
@@ -45,6 +45,8 @@ char* enter_color() {
         new_data = temp;
         //printf("(%s) \n", new_data);
     }
+    if (len == 1)
+        new_data = str_copy("None");
     return new_data;
 }
 
@@ -90,7 +92,6 @@ Animal::~Animal() {
 }
 
 
-/*
 Animal& Animal::operator=(const Animal &src) {
     if (&src  == this)
         return *this;
@@ -104,7 +105,6 @@ Animal& Animal::operator=(const Animal &src) {
 
     return *this;
 }
-*/
 
 
 //_______ GOOSE _______
@@ -147,12 +147,15 @@ void Goose::paint() {
     delete[] this->wings_color;
     delete[] this->body_color;
 
+    std::cout << "(legs) ";
     char* color = enter_color();
     this->legs_color = str_copy(color);
     delete color;
+    std::cout << "(wings) ";
     color = enter_color();
     this->wings_color = str_copy(color);
     delete color;
+    std::cout << "(body) ";
     color = enter_color();
     this->body_color = str_copy(color);
     delete color;
@@ -160,18 +163,20 @@ void Goose::paint() {
 
 
 Goose& Goose::operator=(const Goose& src) {     //Как тут вызвать наследование?
+    this->Animal::operator=(src);
+
     if (&src == this)                           //Нужен ли return если есть в базовом классе?
         return *this;
 
-    this->num = src.num;
-    this->old = src.old;
+    //this->num = src.num;
+    //this->old = src.old;
 
-    delete[] this->name;
+    //delete[] this->name;
     delete[] this->legs_color;
     delete[] this->wings_color;
     delete[] this->body_color;
 
-    this->name = str_copy(src.name);
+    //this->name = str_copy(src.name);
     this->legs_color = str_copy(src.legs_color);
     this->wings_color = str_copy(src.wings_color);
     this->body_color = str_copy(src.body_color);
@@ -208,6 +213,7 @@ Penguin::Penguin(const Penguin& src) : Animal(src) {
 void Penguin::paint() {
     delete[] this->body_color;
     this->body_color = str_copy("black");
+
 }
 
 
@@ -234,7 +240,7 @@ void Penguin::print_animal(){
 
 
 Penguin::~Penguin() {
-    delete[] name;
+    //delete[] name;
     delete[] this->body_color;
 }
 
@@ -252,12 +258,14 @@ Ostrich::Ostrich(char *ostrich_name, unsigned int ostrich_old, char *ostrich_leg
                                                                                     Animal(ostrich_name, ostrich_old) {
     this->legs_color = str_copy(ostrich_legs_color);
     this->wings_color = str_copy(ostrich_wings_color);
+
 }
 
 
 Ostrich::Ostrich(const Ostrich& src) : Animal(src) {
     this->legs_color = str_copy(src.legs_color);
     this->wings_color = str_copy(src.wings_color);
+
 }
 
 
@@ -327,7 +335,7 @@ void Farm::add_new_animal(Animal* a) {
         for (int i = 0; i < this->free_ind; i++)    // if Animals is empty (free_ind)
             new_data[i] = this->Animals[i];
 
-        delete this->Animals;                       // I special delete []
+        delete[] this->Animals;
 
         this->Animals = new_data;
         this->size = this->size * 2;
@@ -352,17 +360,37 @@ void Farm::paint_all_animals() {
 void Farm::delete_animal() {
     if (this->free_ind == 0)
         return;
-    //this->Animals[this->free_ind - 1] = nullptr; // a[1] = o & a[2] = o -> error, класс удалит сам себя в конце?
-    //std::cout<<"\n\n";
-    //this->Animals[this->free_ind-1]->print_animal();
-    delete this->Animals[this->free_ind-1];
+
+    delete this->Animals[this->free_ind-1];   //for new[]
+    //this->Animals[this->free_ind - 1] = nullptr;
     this->free_ind--;
 }
 
 
-Farm::~Farm() {
+int Farm::do_func(int (*func)(Animal* src)) {
+    int temp = 0;
     for (int i = 0; i < free_ind; i++)
-        delete Animals[i];             // Зачем в примере for с delete, если для всех классов будут свои диструкторы далее
-    delete[] Animals;
+        temp = func((this->Animals[i]));
+    return temp;
 }
 
+
+Farm::~Farm() {
+    for (int i = 0; i < free_ind; i++)    // for new[] можно же использовать delete[] вместо for?
+        delete Animals[i];                // Зачем в примере for с delete, если для всех классов будут свои диструкторы далее
+                                            // В классах через new не будет автомат. диструкторов?
+    delete Animals;
+}
+
+
+int my_print_animal(Animal* src) {
+    src->print_animal();
+    return 0;
+}
+
+
+int print_animals_count(Animal* src){
+    static int count = 0;
+    count++;
+    return count;
+}

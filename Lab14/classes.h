@@ -24,7 +24,7 @@ public:
     Animal(const Animal& src);
     Animal(char* animal_name, unsigned int animal_old);
     virtual ~Animal();
-    //Animal& operator=(const Animal& src);
+    virtual Animal& operator=(const Animal& src);
     virtual void print_animal();            // А можно ли вызвать часть от сюда и часть из потомка?
     virtual void paint() {}
 };
@@ -37,11 +37,11 @@ protected:
     char* body_color;
 public:
     Goose();
-    Goose (const Goose& a);         // А надо ли? В примерах конструктора копий не было
+    Goose (const Goose& a);
     Goose (char* goose_name, unsigned int goose_old,
            char* goose_legs_color, char* goose_wings_color, char* goose_body_color);
 
-    virtual void paint();           //  Тут virtual нужен по синт. или для будущего наслед?
+    virtual void paint();
     Goose& operator=(const Goose& src);
     virtual void print_animal();
     virtual ~Goose();
@@ -89,7 +89,12 @@ public:
     void delete_animal();
     void show_all_animals();
     void paint_all_animals();
+    int do_func(int (*func)(Animal* src));      // Возвращает последнее возвращенное функцией значение
     ~Farm();
 };
+
+
+int my_print_animal(Animal* src);
+int print_animals_count(Animal* src);
 
 #endif //LAB14_CLASSES_H
