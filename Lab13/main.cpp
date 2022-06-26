@@ -2,16 +2,17 @@
 
 
 int main() {
-    float f =356.14;
-    String a(f);
+    int num = 543;
+    String a(num);
 
     a += ' ';
     a += (bool)0;
-    a += 3116.14152342;
+    a += 3116.1414;
     a += 5;
     a += "ABFD";
 
     std::cout << a;
+
     /*
     String b;
     b.set(" Hello world!");

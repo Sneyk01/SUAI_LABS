@@ -144,7 +144,7 @@ String::String(double a) {
     }
 
     String new_str(temp);
-    std::cout<<c << " " << (long long int)a << "\n";
+    //std::cout<<c << " " << (long long int)a << "\n";
     *this = new_str;
     char *str = this->get();
     char *new_s = new char[this->len + c + 1];
@@ -155,7 +155,7 @@ String::String(double a) {
 
     new_s[i2++] = ',';
     b = a - temp * pow(10, c);
-    std::cout<<(int)b << "\n";
+    //std::cout<<(int)b << "\n";
 
 
     double temp2 = floor(b);                                           // PREPARATION
