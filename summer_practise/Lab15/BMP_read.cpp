@@ -47,7 +47,7 @@ unsigned char*** read_pixels(BITMAPFILEHEADER& f_head, BITMAPINFOHEADER& i_head,
         }
 
         if (i_head.biWidth % 4 != 0)
-            fseek(image, i_head.biWidth % 4, SEEK_CUR);
+            fseek(image, i_head.biWidth % 4, SEEK_CUR); //skip 0
 
     }
     return pixels;
@@ -80,11 +80,12 @@ void write_info_header(BITMAPINFOHEADER& head, FILE* image) {
 
 void write_pixels(unsigned char*** pixels, BITMAPINFOHEADER& head, FILE* image) {
     char buf[3] = {0};
+
     for(int h = 0; h < abs(head.biHeight); h++) {
         for (int w = 0; w < head.biWidth; w++)
             fwrite(pixels[h][w], 1, 3, image);
 
         if (head.biWidth % 4 != 0)
-            fwrite(buf, 1, head.biWidth % 4, image);
+            fwrite(buf, 1, head.biWidth % 4, image);    // adding 0 if it needs
     }
 }

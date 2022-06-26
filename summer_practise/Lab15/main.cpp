@@ -1,20 +1,23 @@
 #include "BMP_read.h"
 
 
-int main() {
-    int flag = 0;
+int main(int args, char** argv) {
 
     BITMAPFILEHEADER f_head;
     BITMAPINFOHEADER i_head;
 
-    FILE* image = fopen("D:\\Project\\C\\summer_practise\\Lab15\\test.bmp", "rb");
+    char* src_path = argv[1];
+    char* dst_path = argv[2];
+
+    FILE* image = fopen(src_path, "rb");
 
     read_file_header(f_head, image);
     read_info_header(i_head, image);
 
     unsigned char*** pixels = read_pixels(f_head, i_head, image);
 
-    FILE* new_image = fopen("D:\\Project\\C\\summer_practise\\Lab15\\new_test.bmp", "wb");
+
+    FILE* new_image = fopen(dst_path, "wb");
 
     BITMAPFILEHEADER new_f_head = f_head;
     BITMAPINFOHEADER new_i_head = i_head;
@@ -32,7 +35,7 @@ int main() {
     unsigned char*** new_pixels = new unsigned char** [abs(new_i_head.biHeight)];
     for (int h = 0; h < abs(new_i_head.biHeight); h++) {
         new_pixels[h] = new unsigned char *[new_i_head.biWidth];
-        //std::cout <<orientation + h << '\n';
+
         for (int w = 0; w < new_i_head.biWidth; w++) {
             new_pixels[h][w] = new unsigned char[3];
             for(int i = 0; i < 3; i++)
@@ -52,6 +55,8 @@ int main() {
 
     fclose(image);
     fclose(new_image);
+
+    std::cout << "All done! \n";
 
     return 0;
 }
