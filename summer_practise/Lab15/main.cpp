@@ -1,8 +1,12 @@
+// Создать класс с методами load и save_quarter;
+// Добавить обработку ошибок параметров
+
+
 #include "BMP_read.h"
 
 
 int main(int args, char** argv) {
-
+/*
     BITMAPFILEHEADER f_head;
     BITMAPINFOHEADER i_head;
 
@@ -34,7 +38,7 @@ int main(int args, char** argv) {
 
     unsigned char*** new_pixels = new unsigned char** [abs(new_i_head.biHeight)];
     for (int h = 0; h < abs(new_i_head.biHeight); h++) {
-        new_pixels[h] = new unsigned char *[new_i_head.biWidth];
+        new_pixels[h] = new unsigned char* [new_i_head.biWidth];
 
         for (int w = 0; w < new_i_head.biWidth; w++) {
             new_pixels[h][w] = new unsigned char[3];
@@ -55,6 +59,17 @@ int main(int args, char** argv) {
 
     fclose(image);
     fclose(new_image);
+*/
+
+    if (args != 3) {
+        std::cout << "Arguments count error!";
+        return -1;
+    }
+
+    BMP my_image;
+
+    my_image.load(argv[1]);
+    my_image.save_quarter(argv[2]);
 
     std::cout << "All done! \n";
 

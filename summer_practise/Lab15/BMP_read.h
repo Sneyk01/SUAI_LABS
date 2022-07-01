@@ -44,4 +44,17 @@ void write_info_header(BITMAPINFOHEADER& head, FILE* image);
 void write_pixels(unsigned char*** pixels, BITMAPINFOHEADER& head, FILE* image);
 
 
+class BMP {
+private:
+    BITMAPFILEHEADER f_head;
+    BITMAPINFOHEADER i_head;
+    unsigned char*** pixels;
+public:
+    BMP();
+    void load(char* path);
+    void save_quarter(char* path);
+    ~BMP();
+};
+
+
 #endif //LAB15_BMP_READ_H
