@@ -1,3 +1,6 @@
+// n > 0 увеличиваем громкость на n%
+// n < 0 - уменьшаем на n%
+
 #include "WAV.h"
 
 int main(int args, char** argv) {

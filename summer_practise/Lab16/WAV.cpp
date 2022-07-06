@@ -66,10 +66,10 @@ void createNewWav(dataChunk& dataCk, fmtChunk& fmtCk, int percent, FILE* dst) {
 
     SHORT temp;
     for (int i = 0; i < dataCk.datSize / (fmtCk.fmtSpec.nBitsPerSample / 8); i++) {
-        temp = (SHORT)(dataCk.data[i] * (1. - ((double)percent / 100)));
+        temp = (SHORT)(dataCk.data[i] * (1. + ((double)percent / 100)));
 
         if (fmtCk.fmtSpec.nBitsPerSample == 8)      // 8 bit sound
-            temp = (uint8_t)((uint8_t)temp - (127 * ((double)percent / 100)));   // in 8 bits sound 0 == 128; 1 == 129; -1 == 127
+            temp = (uint8_t)((uint8_t)temp + (127 * ((double)percent / 100)));   // in 8 bits sound 0 == 128; 1 == 129; -1 == 127
 
         fwrite(&temp, (fmtCk.fmtSpec.nBitsPerSample / 8), 1, dst);
     }
