@@ -1,7 +1,5 @@
 <?php
-	$link = mysqli_connect("localhost", "forum_db", "12345", "posts");
-	mysqli_set_charset($link, "utf8");
-	
+
 	if (isset($_POST["text"])) {	// Для комментариев																						
 		$text = $_POST["text"];
 		$time = time();
