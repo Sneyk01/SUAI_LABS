@@ -40,7 +40,7 @@ if (isset($_POST["text"])) {
 				exit;
 			}
 			
-			$types = array("image/png", "image/jpeg", "image/jpg");
+			$types = array("image/jpeg", "image/jpg");
 			if (!in_array($file["type"], $types)) {
 				header("Location: http://localhost/forum.php?message=Недопустимый формат файла!");
 				exit;
