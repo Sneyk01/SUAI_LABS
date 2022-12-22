@@ -26,16 +26,16 @@
 В редакторе Figma был разработан пользовательский интерфейс
 
 - Страница авторизации:
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/tree/master/2_course/Lab1/img/signin.png"/width = 70%></p>
+<p align = "center"><img src="https://ie.wampi.ru/2022/12/22/signin.png"/width = 70%></p>
 
 - Страница регистрации:
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/tree/master/2_course/Lab1/img/signu.png"/width = 70%></p>
+<p align = "center"><img src="https://ie.wampi.ru/2022/12/22/signup.png"/width = 70%></p>
 
 - Главная страница:
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/tree/master/2_course/Lab1/img/main.png"/width = 70%></p>
+<p align = "center"><img src="https://ie.wampi.ru/2022/12/22/main.png"/width = 70%></p>
 
 - Страница восстановления пароля:
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/tree/master/2_course/Lab1/img/restore.png"/width = 70%></p>
+<p align = "center"><img src="https://ie.wampi.ru/2022/12/22/restore.png"/width = 70%></p>
 
 
 
