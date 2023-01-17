@@ -21,13 +21,13 @@
 В редакторе Figma был разработан прототип пользовательского интерфейса для чата
 
 - Страница авторизации:
-<p align = "center"><img src="https://github.com/Sneyk01/2_course/Lab3/images/login.svg"/width = 50%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab3/images/login.svg"/width = 50%></p>
 
 - Главная страница со списком чатов:
-<p align = "center"><img src="https://github.com/Sneyk01/2_course/Lab3/images/main.svg"/width = 50%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab3/images/main.svg"/width = 50%></p>
 
 - Интерфейс чата:
-- <p align = "center"><img src="https://github.com/Sneyk01/2_course/Lab3/images/chat.svg"/width = 50%></p>
+- <p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab3/images/main_chat.svg"/width = 50%></p>
 
 ### 2. Описание пользовательских сценариев работы
 При входе на сайт перед пользователем появляется страница авторизации. На ней пользователю нужно выбрать имя и нажать кнопку "Войти". Если имя для пользователя не важно, сервер автоматически сгенерирует ему имя. В случае, если пользователь попытается ввести уже занятое имя, высветится сообщение об ошибке.
@@ -66,13 +66,13 @@
 Для проверки данных и внесения изменений в базу данных используются ajax запросы с целью избегания обнавлений страниц. 
 
 - Пример запросов, когда пользователь хочет изменить свое имя:
-<p align = "center"><img src="https://github.com/Sneyk01/2_course/Lab3/images/name.svg"/width = 50%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab3/images/name.svg"/width = 50%></p>
 
 - Пример запросов, когда пользователь создает новый чат:
-<p align = "center"><img src="https://github.com/Sneyk01/2_course/Lab3/images/chat.svg"/width = 50%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab3/images/chat.svg"/width = 50%></p>
 
 - Пример запросов, когда пользователь оставляет сообщение в чате:
-<p align = "center"><img src="https://github.com/Sneyk01/2_course/Lab3/images/message.svg"/width = 50%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab3/images/message.svg"/width = 50%></p>
 
 
 ### 4. Описание структуры базы данных
