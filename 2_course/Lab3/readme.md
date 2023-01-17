@@ -126,7 +126,7 @@
 
 ## Значимые фрагменты кода
 Фрагмент кода, меняющий имя пользователя:
-'''sh
+```sh
 if ($_POST["method"] == "change_name") {
     $new_login = $_POST["login"];
 
@@ -147,7 +147,7 @@ if ($_POST["method"] == "change_name") {
     echo json_encode(["result" => "True"]);
     exit();
 }
-'''
+```
 
 Фрагмент кода, добавляющий чат:
 ```sh
@@ -168,7 +168,7 @@ if ($_POST["method"] == "add_chat") {
         $_POST["chat_access"] = $_POST["login"] . ";" . $_POST["chat_access"];
         $_POST["chat_access"] = str_replace(" ", "", $_POST["chat_access"]);
     }
-    $sql = "INSERT INTO `chats_table` (`id`, `name`, `type`, `last_message`, `access_names`) VALUES (NULL, '".$_POST["chat_name"]."', '".$_POST["chat_type"]."', '".time()."', '".$_POST["chat_access"]."');";
+    $sql = "INSERT INTO `chats_table` (`id`, `name`, `type`, `last_message`, `access_names`) VALUES (NULL, '".$_POST["chat_name"]."', '".$_POST["chat_type"]."',     '".time()."', '".$_POST["chat_access"]."');";
     $result = mysqli_query($link, $sql);
 
     echo json_encode(["result" => "True", "message" => "Чат создан"]);
@@ -192,6 +192,24 @@ if ($_POST["method"] == "add_message") { // Не забудь потом про 
     //echo words_filter($_POST["message"]);
     echo json_encode(["result" => "True", "message" => "Сообщение создано"]);
     exit();
+}
+```
+
+Фрагмент кода, обновляющий сообщения:
+```sh
+
+        $.get("template/chat.php?chat_id="+chat_id, function (data) {
+            $(".container-fluid").html(data);
+        })
+
+        clearInterval(auto_update);
+        auto_update = setInterval(function() {insert_chat(chat_id)}, 1000);
+        
+        function insert_chat(chat_id){
+
+         $.get("template/chat_messages.php?chat_id="+chat_id, function (data) {
+         $(".scrollable_chat").html(data);
+        })
 }
 ```
 
