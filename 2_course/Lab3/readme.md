@@ -208,8 +208,8 @@ if ($_POST["method"] == "add_message") { // Не забудь потом про 
         function insert_chat(chat_id){
 
          $.get("template/chat_messages.php?chat_id="+chat_id, function (data) {
-         $(".scrollable_chat").html(data);
-        })
-}
+          $(".scrollable_chat").html(data);
+         })
+        }
 ```
 
