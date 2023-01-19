@@ -20,13 +20,13 @@
 В редакторе Figma был разработан прототип пользовательского интерфейса для лобби и самой игры.
 
 - Дизайн лобби:
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab4/images/lobby.svg"/width = 50%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/ping_pong_game/images/lobby.svg"/width = 50%></p>
 
 - Игровое поле:
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab4/images/main.svg"/width = 50%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/ping_pong_game/images/main.png"/width = 50%></p>
 
 - Игровое поле с использованием одного из модификатора сложности:
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab4/images/main_mod.svg"/width = 50%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/ping_pong_game/images/main_mod.png"/width = 50%></p>
 
 ### 2. Описание пользовательских сценариев работы
 При переходе на страничку игры перед пользователем поялвляется локальное лобби, где он может изменить свой ник, в случае если ему не нравится вариант, автоматически сгенерированный сервером.
