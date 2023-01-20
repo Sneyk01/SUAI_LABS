@@ -1,0 +1,70 @@
+li {
+    list-style-type: none;
+}
+
+.container-fluid {
+    max-width: 99%;!important;
+}
+
+.btn-success,
+.btn-success:active,
+.btn-success:visited {
+    background-color: #0499FF !important;
+}
+
+.btn-success:hover {
+    background-color: #0449AF !important;
+    transition: all 1s ease;
+}
+
+.header_div {
+    height: 70px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    background-color: #FE59C2 !important;
+}
+
+.padding {
+    padding-left: 32px;
+    padding-right: 16px;
+}
+
+.row_h {
+    height: 60vh;
+}
+
+
+.scrollable {
+    height: 72vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-bottom: 1px solid #ddd;
+}
+
+.scrollable_chat {
+    height: 70vh;
+    overflow: hidden;
+    overflow-y: scroll;
+
+}
+
+.scrollable::-webkit-scrollbar{
+    width: 0;
+}
+
+.bg-gray {
+    background-color: #1E1E20 !important;
+}
+
+.bg-blue {
+    background-color: #04D9FF;
+}
+
+.blink_text {
+    animation: blinker 5s linear infinite;
+}
+@keyframes blinker {
+    50% {
+        opacity: 0;
+    }
+}
