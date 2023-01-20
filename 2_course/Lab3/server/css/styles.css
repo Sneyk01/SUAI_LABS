@@ -1,0 +1,72 @@
+li {
+    list-style-type: none;
+}
+
+.container-fluid {
+    max-width: 99%;!important;
+}
+
+.btn-success,
+.btn-success:active,
+.btn-success:visited {
+    background-color: #5F9EFC !important;
+}
+
+.btn-success:hover {
+    background-color: #5F7EFC !important;
+    transition: all 1s ease;
+}
+
+.header_div {
+    height: 55px;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+    background-color: #5F9EFC !important;
+}
+
+.bg-blue {
+    background-color: #5F9EFC !important;
+}
+
+.padding {
+    padding-left: 32px;
+    padding-right: 16px;
+}
+
+.row_h {
+    height: 60vh;
+}
+
+
+.scrollable {
+    height: 72vh;
+    overflow: hidden;
+    overflow-y: scroll;
+    border-bottom: 1px solid #ddd;
+}
+
+.scrollable_chat {
+    height: 70vh;
+    overflow: hidden;
+    overflow-y: scroll;
+
+}
+
+
+.scrollable::-webkit-scrollbar{
+    width: 0;
+}
+
+.successfully {
+    animation: color-change 2s;
+}
+
+@keyframes color-change {
+    0% { background-color: #FFFFFF; }
+    50% { background-color: #63D708; }
+    100% { background-color: #FFFFFF; }
+}
+
+.bg-gray {
+    background-color: #EFEFEF !important;
+}
