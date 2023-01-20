@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+
+<html lang="ru">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Ping-Pong</title>
+
+        <link rel="stylesheet" href="css/styles.css" type="text/css">
+
+        <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+        <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+        <script type="text/javascript" src="http://ajax.googleapis.com/ajax/libs/jquery/1.9.0/jquery.min.js"></script>
+        <script type="text/javascript" src="http://code.jquery.com/color/jquery.color-2.1.2.js"></script>   <!-- Для анимаций цвета -->
+
+
+
+    </head>
+
+    <body class="bg-gray">
+        <div class="row header_div mb-3">
+            <div class="col-8"><h1 class="text-white mb-3 mt-2" style="margin-left: 1%">  Ping-Pong </h1></div>
+            <div class="col-2"> <p class="mb-0 mt-3 float-end fs-5 text-white"> Имя пользователя:</p> </div>
+            <div class="col-1"> <input id="login_field" type="text" class="form-control mt-3 col-12" value="Ваш ник"> </div>
+            <div class="col-1"> <button type="submit" id="login_button" class="col-10 me-2 float-end btn btn-light border mt-3 ps-1">Изменить</button></div>
+            <input type="hidden" id="cur_login" value="<?php echo get_login()?>"> <!-- Чтобы знать текущий логин (в верхнем поле может быть не принятый) -->
+        </div>
+
+        <div class="container-fluid" id="main_container">
+            <!-- Сюда вставляется нужный элемент-->
+        </div>
+    </body>
+</html>
+
+<script>
+    const server = "ws://192.168.0.114:8999";
+    let ws = null;
+
+    $(document).ready(function (){
+        $("#main_container").load("lobby.html");
+        $("#login_field").val("user"+ Math.round(Math.random()*(999-100)+100));
+    })
+
+    function start_search(){
+        let button = $("#lobby_button");
+        if(button.text() === "Играть") {
+            $("#spinner").attr("hidden", false);
+            $("#spinner_text").text("Ожидаем соперника");
+            button.text("Отмена");
+            if (ws == null)
+                start_ws();
+            else {
+                ws.send(JSON.stringify({type: "start_search", level: $("input:checked").val(), login: $("#login_field").val()}));
+                console.log("Send start2 "+ $("input:checked").val());
+            }
+
+        }
+        else {
+            $("#spinner").prop("hidden", true);
+            $("#spinner_text").text("Нажмите играть, чтобы начать!");
+            button.text("Играть");
+            ws.send(JSON.stringify({type: "stop_search"}));
+        }
+    }
+
+    function start_ws(){
+        ws = new WebSocket(server);
+        localStorage.setItem("ws", ws);
+        ws.onopen = function () {
+            console.log("Connected!");
+            ws.send(JSON.stringify({type: "ping"}));
+            ws.send(JSON.stringify({type: "start_search", level: $("input:checked").val(), login: $("#login_field").val()}));
+            console.log("Send start");
+            heart_rate();
+        };
+
+        ws.addEventListener("message", function (data) {
+            data = JSON.parse(data.data);
+            console.log(data);
+            if (data.type === "start") {
+                $("#main_container").html("<div class=\"bg-dark\"><canvas class=\"col-12\" height='400' width='800' id='canvas' style=\"width: 98vw; height: 80vh\"></canvas></div>");
+                pong();
+            }
+            if (data.type === "score") {
+                $("#score").text(data.player_score);
+                if(data.login.length > 1)
+                    $("#login_field").val(data.login);
+                $("#top1").text(data.top1.login);
+                $("#top2").text(data.top2.login);
+                $("#top3").text(data.top3.login);
+                $("#rating1").text(data.top1.rating);
+                $("#rating2").text(data.top2.rating);
+                $("#rating3").text(data.top3.rating);
+            }
+        });
+
+        ws.onclose = function () {
+        }
+    }
+
+    function close_ws(){
+        ws.close();
+    }
+
+    function heart_rate() {
+        let rate_time = setInterval(function (){
+            if (ws.readyState != 1) {
+                clearInterval(rate_time);
+                return
+            }
+            ws.send(JSON.stringify({type: "ping"}));
+        }, 55000);
+    }
+
+
+
+
+
+
+</script>
+<script src="game.js"></script>
