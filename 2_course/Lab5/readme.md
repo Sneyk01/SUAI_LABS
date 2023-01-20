@@ -11,7 +11,7 @@
 Для демонстрации работы программы был написан простой пользовательский интерфейс
 
 - Основная страница:
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab5/images/main.png"/width = 50%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab5/images/main.png"/width = 100%></p>
 
 ### 2. Описание пользовательских сценариев работы
 
@@ -26,9 +26,9 @@
 
 Для отображения, генерации и сортировки массива, со страницы index.php отправляются ajax запросы на страницу edit_db.php. С примерами запросов можно ознакомится ниже:
 
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab5/images/create.png"/width = 30%></p>
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab5/images/show.png"/width = 30%></p>
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab5/images/sort.png"/width = 30%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab5/images/create.svg"/width = 30%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab5/images/show.svg"/width = 30%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab5/images/sort.svg"/width = 30%></p>
 
 ### 4. Описание структуры базы данных
 
