@@ -11,7 +11,7 @@
 Для демонстрации работы программы был написан простой пользовательский интерфейс
 
 - Основная страница:
-<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab5/images/main.png"/width = 100%></p>
+<p align = "center"><img src="https://github.com/Sneyk01/SUAI_LABS/blob/master/2_course/Lab5/images/main.png"></p>
 
 ### 2. Описание пользовательских сценариев работы
 
